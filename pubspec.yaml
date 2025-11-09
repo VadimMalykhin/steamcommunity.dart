@@ -1,6 +1,7 @@
 name: steamcommunity
 description: A Dart package that providing access to the Steam Community.
 version: 0.0.1
+publish_to: none
 repository: https://github.com/VadimMalykhin/steamcommunity.dart
 
 environment:
