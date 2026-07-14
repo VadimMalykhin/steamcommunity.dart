@@ -1,4 +1,4 @@
-/// A Dart package that providing access to the Steam Community.
+/// A Dart package providing access to the Steam Community.
 library;
 
 export 'src/models/aliases_data.dart';
