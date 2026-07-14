@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:xml/xml.dart';
 
-import 'models/models.dart';
+import 'models/aliases_data.dart';
+import 'models/miniprofile_data.dart';
+import 'models/profile_data.dart';
+import 'utils.dart';
 
 class SteamCommunity {
   factory SteamCommunity() => _instance;
@@ -77,6 +80,18 @@ class SteamCommunity {
     );
     if (response.statusCode == HttpStatus.ok) {
       return List<Alias>.from(response.data.map((json) => Alias.fromJson(json)).toList());
+    }
+    return null;
+  }
+
+  /// Get the Steam Mini Profile.
+  Future<SteamMiniProfile?> miniProfile(String steamId64) async {
+    final steamId32 = convertSteamId64ToSteamId32(steamId64);
+    final response = await _dio.getUri(
+      Uri.https('steamcommunity.com', 'miniprofile/$steamId32/json', {'l': 'english'}),
+    );
+    if (response.statusCode == HttpStatus.ok) {
+      return SteamMiniProfile.fromJson(response.data);
     }
     return null;
   }
